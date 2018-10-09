@@ -586,8 +586,31 @@
     </div>
 </template>
 <script>
+//导入axios
+import axios from "axios";
+
+// 发请求获取数据
+
 export default {
-  name: "index"
+  name: "index",
+  data:function(){
+      return{
+          catelist:[],
+          sliderlist:[],
+          toplist:[]
+      };
+  },
+//   生命周期钩子函数
+    // 创建后
+  created() {
+    axios.get("http://111.230.232.110:8899/site/goods/gettopdata/goods").then(response=>{
+        console.log(response);
+        this.catelist = response.data.message.catelist;
+        this.sliderlist = response.data.message.sliderlist;
+        this.toplist = response.data.message.toplist;
+        console.log(this.catelist);
+    })
+  },
 };
 </script>
 <style>
